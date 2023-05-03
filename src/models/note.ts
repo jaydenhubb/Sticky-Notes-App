@@ -1,5 +1,5 @@
-import { model } from "mongoose";
-import { InferSchemaType, Schema } from "mongoose"
+import { model, InferSchemaType, Schema  } from "mongoose";
+
 
 const noteSchema = new Schema({
     title: {type:String, required:true},
