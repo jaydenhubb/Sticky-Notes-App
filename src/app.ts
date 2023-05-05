@@ -9,6 +9,7 @@ import cors from 'cors'
 import session from 'express-session';
 import env from "./utils/validateEnvs"
 import MongoStore from 'connect-mongo';
+import { RequireAuth } from './middlewares/auth';
 
 
 const app = express()
@@ -36,7 +37,7 @@ app.use(
   }))
 
 app.use('/api/users', userRoute)
-app.use('/api/notes', noteRoutes)
+app.use('/api/notes', RequireAuth, noteRoutes)
 
 app.use(notFound)
 

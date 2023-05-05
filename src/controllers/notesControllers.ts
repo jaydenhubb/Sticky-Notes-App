@@ -2,12 +2,15 @@ import { RequestHandler } from "express"
 import NoteModel from '../models/note'
 import createHttpError from "http-errors";
 import mongoose from "mongoose";
+import { isDefined } from "../utils/isDefined";
 // import validate from "../utils/validateID";
 
 
 export const getNotes:RequestHandler = async (req, res, next) => {
+    const userId = req.session.id
     try {
-        const notes = await NoteModel.find().exec()
+        isDefined(userId)
+        const notes = await NoteModel.find({userId: userId}).exec()
         res.status(200).json(notes)
 
     }catch(error){
